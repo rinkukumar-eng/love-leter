@@ -1,0 +1,609 @@
+<!DOCTYPE html>  <html lang="en">  
+<head>  
+<meta charset="UTF-8">  
+<meta name="viewport" content="width=device-width, initial-scale=1.0">  <title>love-naitik♥️manshi</title>  <style>  
+* {  
+    margin: 0;  
+    padding: 0;  
+    box-sizing: border-box;  
+}  
+  
+body {  
+    min-height: 100vh;  
+    overflow: hidden;  
+    font-family: "Segoe UI", sans-serif;  
+    background:  
+        radial-gradient(circle at top left, #ffb6c9 0%, transparent 35%),  
+        radial-gradient(circle at bottom right, #c9a7ff 0%, transparent 35%),  
+        linear-gradient(135deg, #ffdde8, #e8d9ff);  
+    display: flex;  
+    justify-content: center;  
+    align-items: center;  
+    color: #4a2140;  
+}  
+  
+/* Floating hearts */  
+.heart {  
+    position: fixed;  
+    bottom: -30px;  
+    font-size: 20px;  
+    opacity: 0.6;  
+    animation: floatUp linear infinite;  
+    pointer-events: none;  
+}  
+  
+@keyframes floatUp {  
+    from {  
+        transform: translateY(0) rotate(0deg);  
+        opacity: 0;  
+    }  
+  
+    20% {  
+        opacity: 0.7;  
+    }  
+  
+    to {  
+        transform: translateY(-110vh) rotate(360deg);  
+        opacity: 0;  
+    }  
+}  
+  
+/* Main container */  
+.container {  
+    width: min(92%, 520px);  
+    position: relative;  
+    z-index: 5;  
+}  
+  
+/* Envelope */  
+.envelope-area {  
+    text-align: center;  
+}  
+  
+.envelope {  
+    width: 330px;  
+    height: 220px;  
+    margin: auto;  
+    position: relative;  
+    cursor: pointer;  
+    perspective: 1000px;  
+}  
+  
+.envelope-body {  
+    position: absolute;  
+    width: 100%;  
+    height: 100%;  
+    background: linear-gradient(145deg, #ff6f91, #ff477e);  
+    border-radius: 8px;  
+    box-shadow: 0 20px 45px rgba(90, 25, 70, 0.25);  
+    overflow: hidden;  
+}  
+  
+.envelope-body::before {  
+    content: "";  
+    position: absolute;  
+    inset: 0;  
+    background: linear-gradient(  
+        145deg,  
+        transparent 50%,  
+        rgba(255,255,255,0.18) 50%  
+    );  
+}  
+  
+.flap {  
+    position: absolute;  
+    width: 0;  
+    height: 0;  
+    left: 0;  
+    top: 0;  
+    border-left: 165px solid transparent;  
+    border-right: 165px solid transparent;  
+    border-top: 115px solid #ff9ab3;  
+    transform-origin: top;  
+    transition: transform 0.8s ease;  
+    z-index: 4;  
+}  
+  
+.envelope.open .flap {  
+    transform: rotateX(180deg);  
+}  
+  
+.letter-inside {  
+    position: absolute;  
+    width: 275px;  
+    height: 175px;  
+    background: white;  
+    left: 27px;  
+    top: 25px;  
+    border-radius: 5px;  
+    transition: transform 0.9s ease;  
+    z-index: 2;  
+    box-shadow: 0 5px 15px rgba(0,0,0,0.15);  
+}  
+  
+.envelope.open .letter-inside {  
+    transform: translateY(-125px);  
+}  
+  
+.seal {  
+    position: absolute;  
+    left: 50%;  
+    top: 52%;  
+    transform: translate(-50%, -50%);  
+    width: 55px;  
+    height: 55px;  
+    border-radius: 50%;  
+    background: #c9184a;  
+    color: white;  
+    display: flex;  
+    align-items: center;  
+    justify-content: center;  
+    font-size: 25px;  
+    z-index: 5;  
+    box-shadow: 0 5px 15px rgba(120,0,40,0.3);  
+}  
+  
+.open-text {  
+    margin-top: 35px;  
+    font-size: 17px;  
+    color: #70244d;  
+    animation: pulse 1.5s infinite;  
+}  
+  
+@keyframes pulse {  
+    50% {  
+        transform: scale(1.05);  
+        opacity: 0.7;  
+    }  
+}  
+  
+/* Letter */  
+.letter-page {  
+    display: none;  
+    position: relative;  
+    background: rgba(255,255,255,0.92);  
+    border-radius: 25px;  
+    padding: 35px 28px;  
+    box-shadow:  
+        0 25px 70px rgba(70, 20, 70, 0.25),  
+        inset 0 0 40px rgba(255, 180, 200, 0.18);  
+    backdrop-filter: blur(12px);  
+    text-align: center;  
+    animation: letterAppear 0.8s ease;  
+}  
+  
+@keyframes letterAppear {  
+    from {  
+        opacity: 0;  
+        transform: translateY(30px) scale(0.9);  
+    }  
+  
+    to {  
+        opacity: 1;  
+        transform: translateY(0) scale(1);  
+    }  
+}  
+  
+.small-title {  
+    color: #c9184a;  
+    font-size: 14px;  
+    letter-spacing: 3px;  
+    text-transform: uppercase;  
+}  
+  
+h1 {  
+    margin-top: 8px;  
+    font-family: Georgia, serif;  
+    color: #8b1e48;  
+    font-size: 32px;  
+}  
+  
+.to {  
+    margin-top: 8px;  
+    font-size: 19px;  
+    color: #777;  
+}  
+  
+.message {  
+    margin: 25px auto;  
+    max-width: 430px;  
+    line-height: 1.8;  
+    font-size: 16px;  
+    color: #4c3544;  
+}  
+  
+.signature {  
+    font-family: "Brush Script MT", cursive;  
+    font-size: 29px;  
+    color: #c9184a;  
+    margin-top: 20px;  
+}  
+  
+.question {  
+    margin-top: 25px;  
+    font-size: 21px;  
+    font-weight: 700;  
+    color: #8b1e48;  
+}  
+  
+.buttons {  
+    margin-top: 22px;  
+    display: flex;  
+    justify-content: center;  
+    gap: 18px;  
+    position: relative;  
+    min-height: 55px;  
+}  
+  
+button {  
+    border: none;  
+    padding: 13px 30px;  
+    border-radius: 50px;  
+    font-size: 16px;  
+    font-weight: 700;  
+    cursor: pointer;  
+    transition: 0.25s ease;  
+}  
+  
+#yesBtn {  
+    background: linear-gradient(135deg, #ff477e, #c9184a);  
+    color: white;  
+    box-shadow: 0 8px 20px rgba(201,24,74,0.3);  
+}  
+  
+#yesBtn:hover {  
+    transform: scale(1.08);  
+}  
+  
+#noBtn {  
+    background: #eee;  
+    color: #555;  
+    position: relative;  
+}  
+  
+#noBtn:hover {  
+    background: #ddd;  
+}  
+  
+/* Final screen */  
+.final {  
+    display: none;  
+    text-align: center;  
+    animation: finalAppear 0.8s ease;  
+}  
+  
+@keyframes finalAppear {  
+    from {  
+        opacity: 0;  
+        transform: scale(0.7);  
+    }  
+  
+    to {  
+        opacity: 1;  
+        transform: scale(1);  
+    }  
+}  
+  
+.final-heart {  
+    font-size: 90px;  
+    animation: heartbeat 1s infinite;  
+}  
+  
+@keyframes heartbeat {  
+    50% {  
+        transform: scale(1.18);  
+    }  
+}  
+  
+.final h2 {  
+    margin-top: 15px;  
+    font-family: Georgia, serif;  
+    font-size: 34px;  
+    color: #a4133c;  
+}  
+  
+.final p {  
+    margin-top: 15px;  
+    font-size: 17px;  
+    line-height: 1.7;  
+}  
+  
+.from {  
+    margin-top: 20px;  
+    font-family: "Brush Script MT", cursive;  
+    font-size: 30px;  
+    color: #c9184a;  
+}  
+  
+/* Mobile */  
+@media (max-width: 500px) {  
+  
+    .envelope {  
+        width: 290px;  
+        height: 195px;  
+    }  
+  
+    .flap {  
+        border-left-width: 145px;  
+        border-right-width: 145px;  
+        border-top-width: 100px;  
+    }  
+  
+    .letter-inside {  
+        width: 240px;  
+        height: 155px;  
+        left: 25px;  
+    }  
+  
+    .envelope.open .letter-inside {  
+        transform: translateY(-105px);  
+    }  
+  
+    .letter-page {  
+        padding: 28px 20px;  
+    }  
+  
+    h1 {  
+        font-size: 27px;  
+    }  
+  
+    .message {  
+        font-size: 15px;  
+    }  
+}  
+</style>  </head>  <body>  <div class="container">  <!-- ENVELOPE -->  
+<div class="envelope-area" id="envelopeArea">  
+
+    <div class="envelope" id="envelope">  
+
+        <div class="envelope-body"></div>  
+
+        <div class="letter-inside"></div>  
+
+        <div class="flap"></div>  
+
+        <div class="seal">❤️</div>  
+
+    </div>  
+
+    <div class="open-text">  
+        💌 Tap the envelope to open  
+    </div>  
+
+</div>  
+
+
+<!-- LETTER -->  
+<div class="letter-page" id="letterPage">  
+
+    <div class="small-title">  
+        A little something from my heart  
+    </div>  
+
+    <h1>Love Letter 💌</h1>  
+
+    <div class="to">  
+        For <strong>manshi</strong> ❤️  
+    </div>  
+
+    <div class="message">  
+
+        Dear Tanisha,<br><br>  
+
+        I don't know the perfect way to say this,  
+        so I decided to say it from my heart.  
+
+        Sometimes, one person can make an ordinary  
+        day feel a little more special just by being there.  
+
+        And somehow, you became that person for me. ❤️  
+
+        <br><br>  
+
+        I just wanted you to know that  
+        <strong>you are special to me.</strong>  
+
+        <br><br>  
+
+        So I have one simple question for you...  
+
+    </div>  
+
+    <div class="signature">  
+        Love,<br>  
+        Naitik ❤️  
+    </div>  
+
+    <div class="question">  
+        Will you be mine? 💖  
+    </div>  
+
+    <div class="buttons">  
+
+        <button id="yesBtn">  
+            Yes ❤️  
+        </button>  
+
+        <button id="noBtn">  
+            No 😶  
+        </button>  
+
+    </div>  
+
+</div>  
+
+
+<!-- FINAL -->  
+<div class="final" id="finalScreen">  
+
+    <div class="final-heart">  
+        💖  
+    </div>  
+
+    <h2>Yay! ❤️</h2>  
+
+    <p>  
+        You just made Naitik's heart<br>  
+        a little happier today. 🥹  
+    </p>  
+
+    <div class="from">  
+        Naitik♥️  
+    </div>  
+
+</div>
+
+</div>  <script>  
+  
+const envelope = document.getElementById("envelope");  
+const envelopeArea = document.getElementById("envelopeArea");  
+const letterPage = document.getElementById("letterPage");  
+  
+const yesBtn = document.getElementById("yesBtn");  
+const noBtn = document.getElementById("noBtn");  
+  
+const finalScreen = document.getElementById("finalScreen");  
+  
+  
+/* Open envelope */  
+envelope.addEventListener("click", function () {  
+  
+    envelope.classList.add("open");  
+  
+    /*  
+       No automatic timer.  
+       Letter appears only after the user clicks.  
+    */  
+    envelopeArea.style.display = "none";  
+    letterPage.style.display = "block";  
+  
+});  
+  
+  
+/* YES button */  
+yesBtn.addEventListener("click", function () {  
+  
+    letterPage.style.display = "none";  
+    finalScreen.style.display = "block";  
+  
+    createHeartExplosion();  
+  
+});  
+  
+  
+/* NO button moves away */  
+function moveNoButton() {  
+  
+    const maxX = window.innerWidth - noBtn.offsetWidth - 20;  
+    const maxY = window.innerHeight - noBtn.offsetHeight - 20;  
+  
+    const x = Math.random() * Math.max(maxX, 20);  
+    const y = Math.random() * Math.max(maxY, 20);  
+  
+    noBtn.style.position = "fixed";  
+    noBtn.style.left = x + "px";  
+    noBtn.style.top = y + "px";  
+  
+}  
+  
+  
+/* Desktop */  
+noBtn.addEventListener("mouseenter", moveNoButton);  
+  
+  
+/* Mobile */  
+noBtn.addEventListener("touchstart", function(e) {  
+  
+    e.preventDefault();  
+    moveNoButton();  
+  
+});  
+  
+  
+/* Floating background hearts */  
+function createFloatingHeart() {  
+  
+    const heart = document.createElement("div");  
+  
+    heart.className = "heart";  
+  
+    const hearts = ["❤️", "💗", "💕", "💖", "💘"];  
+  
+    heart.innerText =  
+        hearts[Math.floor(Math.random() * hearts.length)];  
+  
+    heart.style.left =  
+        Math.random() * 100 + "vw";  
+  
+    heart.style.animationDuration =  
+        (5 + Math.random() * 5) + "s";  
+  
+    heart.style.fontSize =  
+        (14 + Math.random() * 20) + "px";  
+  
+    document.body.appendChild(heart);  
+  
+    setTimeout(() => {  
+        heart.remove();  
+    }, 10000);  
+  
+}  
+  
+  
+/* Create hearts continuously */  
+setInterval(createFloatingHeart, 700);  
+  
+  
+/* Final heart explosion */  
+function createHeartExplosion() {  
+  
+    for (let i = 0; i < 35; i++) {  
+  
+        const heart = document.createElement("div");  
+  
+        heart.innerText = "❤️";  
+  
+        heart.style.position = "fixed";  
+        heart.style.left = "50%";  
+        heart.style.top = "50%";  
+        heart.style.fontSize = "25px";  
+        heart.style.pointerEvents = "none";  
+        heart.style.zIndex = "100";  
+  
+        document.body.appendChild(heart);  
+  
+        const angle = Math.random() * Math.PI * 2;  
+        const distance = 100 + Math.random() * 300;  
+  
+        const x = Math.cos(angle) * distance;  
+        const y = Math.sin(angle) * distance;  
+  
+        heart.animate(  
+            [  
+                {  
+                    transform: "translate(-50%, -50%) scale(0)",  
+                    opacity: 1  
+                },  
+                {  
+                    transform:  
+                        `translate(calc(-50% + ${x}px),  
+                                   calc(-50% + ${y}px))  
+                         scale(1.5)`,  
+                    opacity: 0  
+                }  
+            ],  
+            {  
+                duration: 1200,  
+                easing: "ease-out"  
+            }  
+        );  
+  
+        setTimeout(() => {  
+            heart.remove();  
+        }, 1300);  
+    }  
+  
+}  
+  
+</script>  </body>  
+</html>
